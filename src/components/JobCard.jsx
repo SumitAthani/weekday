@@ -17,21 +17,7 @@ import {
 
 import React from "react";
 
-const JobCard = () => {
-  let data = {
-    jdUid: "cfff359f-053c-11ef-83d3-06301d0a7178-92008",
-    jdLink: "https://weekday.works",
-    jobDetailsFromCompany:
-      "This is a sample job and you must have displayed it to understand that its not just some random lorem ipsum text but something which was manually written. Oh well, if random text is what you were looking for then here it is: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages and now in this assignment.",
-    maxJdSalary: null,
-    minJdSalary: null,
-    salaryCurrencyCode: null,
-    location: "chennai",
-    minExp: null,
-    maxExp: null,
-    jobRole: "tech lead",
-  };
-
+const JobCard = ({ jobData }) => {
   return (
     <Paper
       elevation={5}
@@ -71,18 +57,19 @@ const JobCard = () => {
                   fontWeight: "500",
                 }}
               >
-                <a href={data.jdLink} style={{}} target="_blank">
+                <a href={jobData.jdLink} style={{}} target="_blank">
                   Companyname
                 </a>
               </div>
-              <div style={{ marginBottom: "5px" }}>{data.jobRole}</div>
-              <div>{data.location}</div>
+              <div style={{ marginBottom: "5px" }}>{jobData.jobRole}</div>
+              <div>{jobData.location}</div>
             </Stack>
           </div>
         </Box>
         <Stack>
           <Typography variant="h8" color="initial" marginTop="10px">
-            Estimated salary: $15 - $25 LPA
+            {jobData.minJdSalary} - {jobData.maxJdSalary}
+            {jobData.salaryCurrencyCode}
           </Typography>
           <Typography
             variant="h8"
@@ -104,7 +91,7 @@ const JobCard = () => {
               "linear-gradient(rgb(255, 255, 255), rgb(255, 255, 255), rgba(255, 255, 255, 0))",
           }}
         >
-          {data.jobDetailsFromCompany}
+          {jobData.jobDetailsFromCompany}
         </Box>
 
         <Button
@@ -126,7 +113,7 @@ const JobCard = () => {
           >
             Minimum Experience
           </h2>
-          <h2>2 years</h2>
+          <h2>{jobData.minExp} years</h2>
         </Stack>
       </CardContent>
       <Box
@@ -188,10 +175,6 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
       opacity: 0,
     },
   },
-}));
-
-const SmallAvatar = styled(Avatar)(({ theme }) => ({
-  border: `2px solid ${theme.palette.background.paper}`,
 }));
 
 function BadgeAvatars() {
